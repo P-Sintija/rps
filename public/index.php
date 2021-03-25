@@ -1,7 +1,7 @@
 <?php
 
 
-require_once 'vendor/autoload.php';
+require_once '../vendor/autoload.php';
 
 
 use Rps\RpsGame;
@@ -16,7 +16,7 @@ $opponent = $pcChoice[rand(0,count($pcChoice)-1)];
 function gameStatus(RpsGame $game): string
 {
     if($game->tie()) {
-        return 'Tie';
+        return 'It`s a TIE!!!';
     } else {
         return $game->determineWinner() . ' won!!!';
     }
@@ -25,7 +25,7 @@ function gameStatus(RpsGame $game): string
 
 
 if($_SERVER['REQUEST_METHOD'] === 'GET') {
-    require_once 'views/view.php';
+    require_once 'view.php';
 
 
 }
@@ -42,7 +42,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $gameStatus = gameStatus($rps);
 
 
-    require_once 'views/otherview.php';
+    require_once 'otherview.php';
 
 }
 

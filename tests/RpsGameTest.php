@@ -38,6 +38,27 @@ class RpsGameTest extends TestCase
         $this->assertTrue($player === $opponent);
     }
 
+    public function testWinner(): void
+    {
+        $game = new RpsGame();
+        $game->setCombination(new Rock(), new Scissors());
+        $this->assertEquals('YOU', $game->determineWinner());
+
+        $game->setCombination(new Rock(), new Paper());
+        $this->assertEquals('PC', $game->determineWinner());
+
+        $game->setCombination(new Paper(), new Rock());
+        $this->assertEquals('YOU', $game->determineWinner());
+
+        $game->setCombination(new Paper(), new Scissors());
+        $this->assertEquals('PC', $game->determineWinner());
+
+        $game->setCombination(new Scissors(), new Rock());
+        $this->assertEquals('PC', $game->determineWinner());
+
+        $game->setCombination(new Scissors(), new Paper());
+        $this->assertEquals('YOU', $game->determineWinner());
+    }
 
 }
 

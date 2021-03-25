@@ -8,6 +8,7 @@ use Rps\Patterns\Pattern;
 use Rps\Patterns\PatternCollection;
 use Rps\Patterns\Rock;
 use Rps\Patterns\Scissors;
+use Rps\Patterns\Spock;
 
 
 class RpsGame
@@ -20,8 +21,8 @@ class RpsGame
     {
         $this->possiblePatterns = new PatternCollection();
         $this->possiblePatterns->addPattern(new Rock());
-        $this->possiblePatterns->addPattern(new Scissors());
         $this->possiblePatterns->addPattern(new Paper());
+        $this->possiblePatterns->addPattern(new Scissors());
     }
 
 
@@ -57,7 +58,7 @@ class RpsGame
         $pc = $this->combination->getPatterns()[1];
 
         if($player->wins($pc) && !$this->tie()){
-            return 'user';
+            return 'YOU';
         }
             return 'PC';
 
