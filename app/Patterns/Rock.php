@@ -20,7 +20,7 @@ class Rock implements Pattern
 
     public function wins(Pattern $opponent): bool
     {
-        if($opponent instanceof Scissors) {
+        if($opponent instanceof Scissors || $opponent instanceof Lizard) {
             return true;
         } else {
             return false;

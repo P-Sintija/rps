@@ -10,34 +10,33 @@ use Rps\Patterns\Rock;
 use Rps\Patterns\Scissors;
 use Rps\Patterns\Spock;
 
-class RockTest extends TestCase
+class SpockTest extends TestCase
 {
 
     public function testImplementation(): void
     {
-        $rock = new Rock();
-        $this->assertInstanceOf(Pattern::class, $rock);
+        $spock = new Spock();
+        $this->assertInstanceOf(Pattern::class, $spock);
     }
 
     public function testName(): void
     {
-        $rock = new Rock();
-        $this->assertEquals('Rock', $rock->getName());
+        $spock = new Spock();
+        $this->assertEquals('Spock', $spock->getName());
     }
 
     public function testWinningConditions(): void
     {
+        $spock = new Spock();
         $rock = new Rock();
         $scissors = new Scissors();
         $paper = new Paper();
-        $spock = new Spock();
         $lizard = new Lizard();
 
-        $this->assertTrue(true === $rock->wins($scissors));
-        $this->assertTrue(true === $rock->wins($lizard));
-        $this->assertNotTrue(true === $rock->wins($spock));
-        $this->assertNotTrue(true === $rock->wins($paper));
+        $this->assertTrue(true === $spock->wins($scissors));
+        $this->assertTrue(true === $spock->wins($rock));
+        $this->assertNotTrue(true === $spock->wins($paper));
+        $this->assertNotTrue(true === $spock->wins($lizard));
     }
 
 }
-

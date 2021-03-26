@@ -3,6 +3,7 @@
 namespace Rps;
 
 
+use Rps\Patterns\Lizard;
 use Rps\Patterns\Paper;
 use Rps\Patterns\Pattern;
 use Rps\Patterns\PatternCollection;
@@ -23,6 +24,8 @@ class RpsGame
         $this->possiblePatterns->addPattern(new Rock());
         $this->possiblePatterns->addPattern(new Paper());
         $this->possiblePatterns->addPattern(new Scissors());
+        $this->possiblePatterns->addPattern(new Spock());
+        $this->possiblePatterns->addPattern(new Lizard());
     }
 
 
@@ -60,7 +63,7 @@ class RpsGame
         if($player->wins($pc) && !$this->tie()){
             return 'YOU';
         }
-            return 'PC';
+        return 'PC';
 
     }
 

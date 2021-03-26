@@ -19,7 +19,7 @@ class Scissors implements Pattern
 
     public function wins(Pattern $opponent): bool
     {
-        if($opponent instanceof Paper) {
+        if($opponent instanceof Paper || $opponent instanceof Lizard) {
             return true;
         } else {
             return false;

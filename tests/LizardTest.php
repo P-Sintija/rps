@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests;
-
 use PHPUnit\Framework\TestCase;
 use Rps\Patterns\Lizard;
 use Rps\Patterns\Paper;
@@ -10,19 +8,19 @@ use Rps\Patterns\Rock;
 use Rps\Patterns\Scissors;
 use Rps\Patterns\Spock;
 
-class RockTest extends TestCase
+class LizardTest extends TestCase
 {
 
     public function testImplementation(): void
     {
-        $rock = new Rock();
-        $this->assertInstanceOf(Pattern::class, $rock);
+        $lizard = new Lizard();
+        $this->assertInstanceOf(Pattern::class, $lizard);
     }
 
     public function testName(): void
     {
-        $rock = new Rock();
-        $this->assertEquals('Rock', $rock->getName());
+        $lizard = new Lizard();
+        $this->assertEquals('Lizard', $lizard->getName());
     }
 
     public function testWinningConditions(): void
@@ -33,11 +31,10 @@ class RockTest extends TestCase
         $spock = new Spock();
         $lizard = new Lizard();
 
-        $this->assertTrue(true === $rock->wins($scissors));
-        $this->assertTrue(true === $rock->wins($lizard));
-        $this->assertNotTrue(true === $rock->wins($spock));
-        $this->assertNotTrue(true === $rock->wins($paper));
+        $this->assertTrue(true === $lizard->wins($spock));
+        $this->assertTrue(true === $lizard->wins($paper));
+        $this->assertNotTrue(true === $lizard->wins($scissors));
+        $this->assertNotTrue(true === $lizard->wins($rock));
     }
 
 }
-

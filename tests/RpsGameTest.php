@@ -3,9 +3,11 @@
 namespace Tests;
 
 use PHPUnit\Framework\TestCase;
+use Rps\Patterns\Lizard;
 use Rps\Patterns\Paper;
 use Rps\Patterns\Rock;
 use Rps\Patterns\Scissors;
+use Rps\Patterns\Spock;
 use Rps\RpsGame;
 
 
@@ -17,7 +19,6 @@ class RpsGameTest extends TestCase
         $possiblePatterns = $game->getPossiblePatterns()->getPatterns();
 
         $this->assertGreaterThanOrEqual(2, count($possiblePatterns));
-        // ->assertGreaterThanOrEqual - izpilda 2 testus vienlaicīgi;
     }
 
     public function testCountCombination(): void
@@ -41,24 +42,54 @@ class RpsGameTest extends TestCase
     public function testWinner(): void
     {
         $game = new RpsGame();
+
         $game->setCombination(new Rock(), new Scissors());
         $this->assertEquals('YOU', $game->determineWinner());
+        $this->assertNotTrue('PC' === $game->determineWinner());
 
-        $game->setCombination(new Rock(), new Paper());
-        $this->assertEquals('PC', $game->determineWinner());
+        $game->setCombination(new Rock(), new Lizard());
+        $this->assertTrue('YOU' === $game->determineWinner());
+        $this->assertNotEquals('PC', $game->determineWinner());
+
 
         $game->setCombination(new Paper(), new Rock());
         $this->assertEquals('YOU', $game->determineWinner());
+        $this->assertNotTrue('PC' === $game->determineWinner());
 
-        $game->setCombination(new Paper(), new Scissors());
-        $this->assertEquals('PC', $game->determineWinner());
+        $game->setCombination(new Paper(), new Spock());
+        $this->assertEquals('YOU', $game->determineWinner());
+        $this->assertNotTrue('PC' === $game->determineWinner());
 
-        $game->setCombination(new Scissors(), new Rock());
-        $this->assertEquals('PC', $game->determineWinner());
 
         $game->setCombination(new Scissors(), new Paper());
         $this->assertEquals('YOU', $game->determineWinner());
+        $this->assertNotTrue('PC' === $game->determineWinner());
+
+        $game->setCombination(new Scissors(), new Lizard());
+        $this->assertEquals('YOU', $game->determineWinner());
+        $this->assertNotTrue('PC' === $game->determineWinner());
+
+
+        $game->setCombination(new Spock(), new Rock());
+        $this->assertEquals('YOU', $game->determineWinner());
+        $this->assertNotTrue('PC' === $game->determineWinner());
+
+        $game->setCombination(new Spock(), new Scissors());
+        $this->assertEquals('YOU', $game->determineWinner());
+        $this->assertNotTrue('PC' === $game->determineWinner());
+
+
+        $game->setCombination(new Lizard(), new Paper());
+        $this->assertEquals('YOU', $game->determineWinner());
+        $this->assertNotTrue('PC' === $game->determineWinner());
+
+        $game->setCombination(new Lizard(), new Spock());
+        $this->assertEquals('YOU', $game->determineWinner());
+        $this->assertNotTrue('PC' === $game->determineWinner());
+
+
     }
+
 
 }
 

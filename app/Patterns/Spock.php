@@ -1,13 +1,14 @@
 <?php
+
 namespace Rps\Patterns;
 
-class Paper implements Pattern
+class Spock implements Pattern
 {
     private string $name;
 
     public function __construct()
     {
-        $this->name = 'Paper';
+        $this->name = 'Spock';
     }
 
     public function getName(): string
@@ -16,9 +17,10 @@ class Paper implements Pattern
     }
 
 
+
     public function wins(Pattern $opponent): bool
     {
-        if($opponent instanceof Rock || $opponent instanceof Spock) {
+        if($opponent instanceof Scissors || $opponent instanceof Rock) {
             return true;
         } else {
             return false;
@@ -27,3 +29,4 @@ class Paper implements Pattern
 
 
 }
+
