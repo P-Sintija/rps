@@ -2,7 +2,6 @@
 
 namespace Rps;
 
-
 use Rps\Patterns\Lizard;
 use Rps\Patterns\Paper;
 use Rps\Patterns\Pattern;
@@ -49,7 +48,7 @@ class RpsGame
 
     public function tie(): bool
     {
-        if ($this->combination->getPatterns()[0]->getName() === $this->combination->getPatterns()[1]->getName()){
+        if ($this->combination->getPatterns()[0]->getName() === $this->combination->getPatterns()[1]->getName()) {
             return true;
         }
         return false;
@@ -60,7 +59,7 @@ class RpsGame
         $player = $this->combination->getPatterns()[0];
         $pc = $this->combination->getPatterns()[1];
 
-        if($player->wins($pc) && !$this->tie()){
+        if ($player->wins($pc) && !$this->tie()) {
             return 'YOU';
         }
         return 'PC';

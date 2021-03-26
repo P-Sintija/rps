@@ -9,7 +9,6 @@ use Rps\RpsGame;
 
 $rps = new RpsGame();
 
-
 $pcChoice = $rps->getPossiblePatterns()->getPatterns();
 $opponent = $pcChoice[rand(0, count($pcChoice) - 1)];
 

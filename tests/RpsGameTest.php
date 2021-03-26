@@ -5,6 +5,7 @@ namespace Tests;
 use PHPUnit\Framework\TestCase;
 use Rps\Patterns\Lizard;
 use Rps\Patterns\Paper;
+use Rps\Patterns\PatternCollection;
 use Rps\Patterns\Rock;
 use Rps\Patterns\Scissors;
 use Rps\Patterns\Spock;
@@ -13,7 +14,15 @@ use Rps\RpsGame;
 
 class RpsGameTest extends TestCase
 {
-    public function testPossiblePatterns(): void
+
+    public function testPatternType(): void
+    {
+        $game = new RpsGame();
+        $possiblePatterns = $game->getPossiblePatterns();
+        $this->assertInstanceOf(PatternCollection::class, $possiblePatterns);
+    }
+
+    public function testPatternCount(): void
     {
         $game = new RpsGame();
         $possiblePatterns = $game->getPossiblePatterns()->getPatterns();
@@ -21,7 +30,14 @@ class RpsGameTest extends TestCase
         $this->assertGreaterThanOrEqual(2, count($possiblePatterns));
     }
 
-    public function testCountCombination(): void
+    public function testCombinationType(): void
+    {
+        $game = new RpsGame();
+        $game->setCombination(new Rock(), new Paper());
+        $this->assertInstanceOf(PatternCollection::class, $game->getCombination());
+    }
+
+    public function testCombinationCount(): void
     {
         $game = new RpsGame();
         $game->setCombination(new Rock(), new Paper());
@@ -39,55 +55,64 @@ class RpsGameTest extends TestCase
         $this->assertTrue($player === $opponent);
     }
 
-    public function testWinner(): void
+    public function testYouWon(): void
     {
         $game = new RpsGame();
 
         $game->setCombination(new Rock(), new Scissors());
         $this->assertEquals('YOU', $game->determineWinner());
-        $this->assertNotTrue('PC' === $game->determineWinner());
 
         $game->setCombination(new Rock(), new Lizard());
         $this->assertTrue('YOU' === $game->determineWinner());
-        $this->assertNotEquals('PC', $game->determineWinner());
 
 
         $game->setCombination(new Paper(), new Rock());
         $this->assertEquals('YOU', $game->determineWinner());
-        $this->assertNotTrue('PC' === $game->determineWinner());
 
         $game->setCombination(new Paper(), new Spock());
         $this->assertEquals('YOU', $game->determineWinner());
-        $this->assertNotTrue('PC' === $game->determineWinner());
 
 
         $game->setCombination(new Scissors(), new Paper());
         $this->assertEquals('YOU', $game->determineWinner());
-        $this->assertNotTrue('PC' === $game->determineWinner());
 
         $game->setCombination(new Scissors(), new Lizard());
-        $this->assertEquals('YOU', $game->determineWinner());
         $this->assertNotTrue('PC' === $game->determineWinner());
 
 
         $game->setCombination(new Spock(), new Rock());
-        $this->assertEquals('YOU', $game->determineWinner());
         $this->assertNotTrue('PC' === $game->determineWinner());
 
         $game->setCombination(new Spock(), new Scissors());
         $this->assertEquals('YOU', $game->determineWinner());
-        $this->assertNotTrue('PC' === $game->determineWinner());
 
 
         $game->setCombination(new Lizard(), new Paper());
-        $this->assertEquals('YOU', $game->determineWinner());
         $this->assertNotTrue('PC' === $game->determineWinner());
 
         $game->setCombination(new Lizard(), new Spock());
         $this->assertEquals('YOU', $game->determineWinner());
-        $this->assertNotTrue('PC' === $game->determineWinner());
 
+    }
 
+    public function testOpponentWon(): void
+    {
+        $game = new RpsGame();
+
+        $game->setCombination(new Lizard(), new Rock());
+        $this->assertTrue('PC' === $game->determineWinner());
+
+        $game->setCombination(new Rock(), new Paper());
+        $this->assertEquals('PC', $game->determineWinner());
+
+        $game->setCombination(new Paper(), new Scissors());
+        $this->assertNotTrue('YOU' === $game->determineWinner());
+
+        $game->setCombination(new Scissors(), new Spock());
+        $this->assertTrue('PC' === $game->determineWinner());
+
+        $game->setCombination(new Spock(), new Lizard());
+        $this->assertNotEquals('YOU', $game->determineWinner());
     }
 
 
